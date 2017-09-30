@@ -203,7 +203,11 @@ The default configuration is as follows:
     linter: false,
 
     // Specifies the port of the dev server.
-    port: 8080
+    port: 8080,
+
+    // Specifies whether the browser should automatically open when the dev
+    // server is live.
+    autoOpenBrowser: true
   }
 }
 ```

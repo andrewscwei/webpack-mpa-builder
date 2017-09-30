@@ -5,7 +5,10 @@
  *       module reloading enabled.
  */
 
+const chalk = require(`chalk`);
 const express = require(`express`);
+const log = require(`../utils/log`);
+const opn = require(`opn`);
 const webpack = require(`webpack`);
 
 module.exports = async function(config, cwd) {
@@ -41,5 +44,11 @@ module.exports = async function(config, cwd) {
   // Enable hot-reload and state-preserving compilation error display.
   app.use(hotMiddleware);
   
+  devMiddleware.waitUntilValid(() => {
+    const uri = `http://localhost:${port}`;
+    log.info(`Running dev server at ${chalk.cyan(uri)}...`);
+    if (config.autoOpenBrowser) opn(uri);
+  });
+
   app.listen(port);
 };

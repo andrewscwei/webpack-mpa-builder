@@ -1,6 +1,6 @@
 {
   "name": "webpack-mpa-builder",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Standalone multi-page app builder using Webpack",
   "bin": {
     "webpack-mpa-builder": "./index.js",
@@ -44,6 +44,7 @@
     "i18n": "^0.8.3",
     "mocha": "^3.5.3",
     "node-sass": "^4.5.3",
+    "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "postcss-loader": "^2.0.6",
     "pug": "^2.0.0-rc.4",
