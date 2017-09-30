@@ -47,7 +47,7 @@ module.exports = async function(config, cwd) {
   devMiddleware.waitUntilValid(() => {
     const uri = `http://localhost:${port}`;
     log.info(`Running dev server at ${chalk.cyan(uri)}...`);
-    if (config.autoOpenBrowser) opn(uri);
+    if (config.dev.autoOpenBrowser) opn(uri);
   });
 
   app.listen(port);
