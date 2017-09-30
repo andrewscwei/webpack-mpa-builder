@@ -48,9 +48,8 @@ module.exports = function(config, cwd) {
 
   // Set up i18n, fetch all the languages from `config/locales`.
   const languages = glob.sync(path.join(configDir, config.config.localesDir, `*.*`)).map(file => (path.parse(file).name));
-  const defaultLocale = `en`;
   i18n.configure({
-    defaultLocale: defaultLocale,
+    defaultLocale: config.defaultLocale,
     locales: languages,
     directory: path.join(configDir, config.config.localesDir),
     register: global
@@ -139,6 +138,13 @@ module.exports = function(config, cwd) {
   return {
     devtool: debug ? `cheap-eval-source-map` : false,
     context: sourceDir,
+    
+    stats: {
+      colors: true,
+      modules: true,
+      reasons: true,
+      errorDetails: true
+    },
 
     // Create an entry for every page.
     entry: entries.reduce((output, entryPath) => {
@@ -272,14 +278,13 @@ module.exports = function(config, cwd) {
       ] : [])
       .concat([].concat.apply([], languages.map(language => {
         return pages.map(page => {
-          const subdir = language === defaultLocale ? `` : `${language}`;
+          const subdir = language === config.defaultLocale ? `` : `${language}`;
           const pageName = path.parse(page).name;
           const entryNames = entries.map(entry => path.parse(entry).name);
       
           const mappings = {
-            'home': path.join(subdir, `index.html`),
-            '404': path.join(subdir, `404.html`),
-            '500': path.join(subdir, `500.html`)
+            [path.parse(config.input.viewIndexFile).name]: path.join(subdir, `index.html`),
+            '404': path.join(subdir, `404.html`)
           };
 
           return new HTMLPlugin({

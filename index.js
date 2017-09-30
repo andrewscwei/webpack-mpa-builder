@@ -9,6 +9,9 @@ const path = require(`path`);
 const program = require(`commander`);
 const version = require(`./package.json`).version;
 
+// Print deprecation call stack.
+process.traceDeprecation = true;
+
 // Root path of the project.
 let baseDir = process.cwd();
 
