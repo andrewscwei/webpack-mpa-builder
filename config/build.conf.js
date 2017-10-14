@@ -165,9 +165,11 @@ module.exports = function(config, cwd) {
       rules: [{
         test: /\.js$/,
         exclude: [
-          /node_modules/,
           path.join(sourceDir, config.input.manifestDir)
-        ],
+        ]
+        .concat(debug ? [
+          /node_modules/
+        ] : []),
         use: javascriptLoaders()
       }, {
         test: /\.pug$/,
