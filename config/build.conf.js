@@ -20,6 +20,7 @@ const CopyPlugin = require(`copy-webpack-plugin`);
 const ExtractTextPlugin = require(`extract-text-webpack-plugin`);
 const HTMLPlugin = require(`html-webpack-plugin`);
 const OptimizeCSSPlugin = require(`optimize-css-assets-webpack-plugin`);
+const ImageminPlugin = require(`imagemin-webpack-plugin`).default;
 
 module.exports = function(config, cwd) {
   // Determine whether this is development environment.
@@ -166,8 +167,7 @@ module.exports = function(config, cwd) {
         test: /\.js$/,
         exclude: [
           path.join(sourceDir, config.input.manifestDir)
-        ]
-        .concat(debug ? [
+        ].concat(debug ? [
           /node_modules/
         ] : []),
         use: javascriptLoaders()
@@ -251,6 +251,11 @@ module.exports = function(config, cwd) {
       ] : [
         new ExtractTextPlugin({
           filename: path.posix.join(config.output.assetsDir, `stylesheets`, `[name].[contenthash].css`)
+        }),
+        new ImageminPlugin({
+          pngquant: {
+            quality: '95-100'
+          }
         }),
         new OptimizeCSSPlugin({
           cssProcessorOptions: {
