@@ -1,7 +1,7 @@
 // © Andrew Wei
 
 /**
- * @file This is the config for Webpack to build the app for both development 
+ * @file This is the config for Webpack to build the app for both development
  *       and production.
  */
 
@@ -40,7 +40,7 @@ module.exports = function(config, cwd) {
   const configDir = path.join(cwd, config.config.baseDir);
   const staticDir = path.join(cwd, config.static.baseDir);
 
-  // Fetch all the entry files. 
+  // Fetch all the entry files.
   const entries = glob.sync(path.join(sourceDir, config.input.entriesDir || ``, `*.*`));
 
   // Fetch all the pages.
@@ -77,14 +77,14 @@ module.exports = function(config, cwd) {
       options: { sourceMap: options.sourceMap, minimize: options.minify }
     }, {
       loader: `postcss-loader`,
-      options: { 
+      options: {
         plugins: () => ([
           require(`autoprefixer`)({})
-        ]) 
+        ])
       }
     }, {
       loader: `sass-loader`,
-      options: { 
+      options: {
         includePaths: [
           path.join(sourceDir, config.input.assetsDir)
         ],
@@ -110,8 +110,8 @@ module.exports = function(config, cwd) {
   function templateLoaders() {
     return javascriptLoaders().concat([{
       loader: `pug-loader`,
-      options: { 
-        root: sourceDir 
+      options: {
+        root: sourceDir
       }
     }]);
   }
@@ -138,7 +138,7 @@ module.exports = function(config, cwd) {
   return {
     devtool: debug ? `cheap-eval-source-map` : false,
     context: sourceDir,
-    
+
     stats: {
       colors: true,
       modules: true,
@@ -191,7 +191,7 @@ module.exports = function(config, cwd) {
         test: /\.(jpe?g|png|gif|svg|ico)(\?.*)?$/,
         exclude: [path.join(sourceDir, config.input.manifestDir)],
         use: urlLoaders({ outputDir: path.join(config.output.assetsDir, `images`) })
-      }, { 
+      }, {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         exclude: [path.join(sourceDir, config.input.manifestDir)],
         use: urlLoaders({ outputDir: path.join(config.output.assetsDir, `media`) })
@@ -216,13 +216,13 @@ module.exports = function(config, cwd) {
         path.join(__dirname, `../`, `node_modules`)
       ],
       alias: {
-        
+
       }
     },
     plugins: [
-      new webpack.DefinePlugin({ 
+      new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: debug ? JSON.stringify(`development`) : JSON.stringify(`production`) 
+          NODE_ENV: debug ? JSON.stringify(`development`) : JSON.stringify(`production`)
         },
         '$config': JSON.stringify(appConfig)
       }),
@@ -258,10 +258,10 @@ module.exports = function(config, cwd) {
             safe: true
           }
         }),
-        new webpack.optimize.UglifyJsPlugin({ 
-          compress: { 
-            warnings: false 
-          } 
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          }
         })
       ])
       .concat((!debug && config.build.gzip) ? [
@@ -281,7 +281,7 @@ module.exports = function(config, cwd) {
           const subdir = language === config.defaultLocale ? `` : `${language}`;
           const pageName = path.parse(page).name;
           const entryNames = entries.map(entry => path.parse(entry).name);
-      
+
           const mappings = {
             [path.parse(config.input.viewIndexFile).name]: path.join(subdir, `index.html`),
             '404': path.join(subdir, `404.html`)
@@ -298,6 +298,7 @@ module.exports = function(config, cwd) {
               removeAttributeQuotes: true
             },
             // Custom properties for templates
+            locale: language,
             __: function() {
               i18n.setLocale(language);
               return i18n.__.apply(i18n, arguments);
