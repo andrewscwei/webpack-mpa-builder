@@ -79,6 +79,7 @@ To use the linter, you must provide your own `.eslintrc.*` file on your project 
     -c, --config <config>        the config file relative to project root
     -i, --inputDir <inputDir>    the input directory relative to project root
     -o, --outputDir <outputDir>  the output directory relative to project root
+    -a, --analyze                specifies whether the bundle analyzer should run on build
     -f, --fix                    specifies whether the linter should automatically fix issues
     -h, --help                   output usage information
 ```

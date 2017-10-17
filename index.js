@@ -27,12 +27,16 @@ let configFile = `config/build.conf`;
 // Specifies whether the linter (if executed) should attempt fixes.
 let shouldLintFix = false;
 
+// Specifies the bundle analyzer to run on build.
+let shouldAnalyze = false;
+
 // Resolve CLI command and options.
 function resolveOptions(cmd, options) {
   if (typeof cmd !== undefined) command = cmd;
   if (options.inputDir !== undefined) inputDir = options.inputDir;
   if (options.outputDir !== undefined) outputDir = options.outputDir;
   if (options.configFile !== undefined) configFile = options.configFile;
+  shouldAnalyze = options.analyze;
   shouldLintFix = options.fix;
 }
 
@@ -51,11 +55,12 @@ async function main() {
     })(c, projectConfig);
 
     hasConfig = true;
-  } 
+  }
   catch (error) {}
 
   if (inputDir) c.input.baseDir = inputDir;
   if (outputDir) c.output.baseDir = outputDir;
+  if (shouldAnalyze) c.build.analyzer = true;
 
   // Catch unsupported commands.
   const supportedCommands = [`clean`, `build`, `dev`, `lint`, ``];
@@ -114,7 +119,7 @@ async function main() {
 
 program
   .version(version)
-  .usage(`[options] <command>\n\n` + 
+  .usage(`[options] <command>\n\n` +
          `  where <command> is one of:\n` +
          `    build:  builds the project in production\n` +
          `      dev:  runs the project on a local dev server with hot module reloading\n` +
@@ -124,6 +129,7 @@ program
   .option(`-c, --config <config>`, `the config file relative to project root`)
   .option(`-i, --inputDir <inputDir>`, `the input directory relative to project root`)
   .option(`-o, --outputDir <outputDir>`, `the output directory relative to project root`)
+  .option(`-a, --analyze`, `specifies whether the bundle analyzer should run on build`)
   .option(`-f, --fix`, `specifies whether the linter should automatically fix issues`)
   .action(resolveOptions)
   .parse(process.argv);
