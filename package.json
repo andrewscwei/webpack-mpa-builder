@@ -1,6 +1,6 @@
 {
   "name": "webpack-mpa-builder",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Standalone multi-page app builder using Webpack",
   "bin": {
     "webpack-mpa-builder": "./index.js",
