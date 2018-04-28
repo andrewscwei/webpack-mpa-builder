@@ -97,31 +97,31 @@ The default configuration is as follows:
 
   // Input paths, where all source files to be processed by Webpack are located.
   input: {
-    // The base path of the input files RELATIVE to the project root (cwd). All 
+    // The base path of the input files RELATIVE to the project root (cwd). All
     // the subseqent paths are RELATIVE to this path.
     baseDir: `app`,
-    
+
     // The path to assets (i.e. fonts, CSS, Javascripts, images, etc.), RELATIVE
     // to the input base path.
     assetsDir: `assets`,
 
-    // The path to manifest files (i.e. favicons, iOS/Android app icons, 
+    // The path to manifest files (i.e. favicons, iOS/Android app icons,
     // manifest.json, etc), RELATIVE to the input base path.
     manifestDir: `manifest`,
 
     // The path to the entry Javascript files for Webpack. This path is RELATIVE
-    // to the input base path. These entry files correspond to every page of 
-    // your app. For every page template you create, you should have a matching 
-    // entry file with the same file name as the page template. Note that only 
-    // the files at the root of this path are taken into account, meaning that 
+    // to the input base path. These entry files correspond to every page of
+    // your app. For every page template you create, you should have a matching
+    // entry file with the same file name as the page template. Note that only
+    // the files at the root of this path are taken into account, meaning that
     // directories are ignored.
     entriesDir: `assets`,
 
     // The path to all the page templates which will be piped into
     // `html-webpack-plugin` individually. This path is RELATIVE to the input
-    // base path. If there exists a Javascript entry file having the same name 
-    // as the template, it will be injected into the generated HTML file. Note 
-    // that only the files at the root of this path are taken into account, 
+    // base path. If there exists a Javascript entry file having the same name
+    // as the template, it will be injected into the generated HTML file. Note
+    // that only the files at the root of this path are taken into account,
     // meaning that directories are ignored.
     viewsDir: `views`,
 
@@ -141,8 +141,8 @@ The default configuration is as follows:
     // directory. This path is RELATIVE to the output base path.
     assetsDir: `assets`,
 
-    // The path where unprocessed static files are copied to. These are the 
-    // files that were originally in the static directory (not part of the 
+    // The path where unprocessed static files are copied to. These are the
+    // files that were originally in the static directory (not part of the
     // inputs). This path is RELATIVE to the output base path.
     staticDir: ``
   },
@@ -183,7 +183,7 @@ The default configuration is as follows:
     // Specifies whether the linter should run.
     linter: true,
 
-    // Specifies whether assets should be gzipped. You might want to skip this 
+    // Specifies whether assets should be gzipped. You might want to skip this
     // if your web host already does it.
     gzip: false,
 
@@ -197,7 +197,7 @@ The default configuration is as follows:
 
   // Config options specific to the `dev` task.
   dev: {
-    // Public path of all loaded assets. 
+    // Public path of all loaded assets.
     publicPath: `/`,
 
     // Specifies whether the linter should run.
@@ -240,11 +240,11 @@ Let's say you have two locale files, `en.json` and `jp.json`, with `en` being th
 
 ```sh
 .
-├── public/
-│   ├── jp/                     
-│   │   └── index.html          # Japanese version of the home page
-│   ├── index.html              # English version of the home page
-│   └── ...
+└── public/
+    ├── jp/
+    │   └── index.html          # Japanese version of the home page
+    ├── index.html              # English version of the home page
+    └── ...
 ```
 
 ## Example Project Structure
@@ -256,38 +256,38 @@ The folder structure of your project matters, though you do have the option to c
 .
 ├── app/ *
 │   ├── assets/ *               # Module assets (processed by webpack)
-│   │   ├── fonts/              
-│   │   ├── images/             
-│   │   ├── stylesheets/        
+│   │   ├── fonts/
+│   │   ├── images/
+│   │   ├── stylesheets/
 │   │   ├── index.js *          # Entry file for home page
 │   │   ├── 404.js              # Entry file for 404 page
 │   │   ├── page2.js            # Entry file for every other page
-│   │   └── ...   
+│   │   └── ...
 │   ├── manifest/ *             # Manifest files (i.e. favicon.png, manfiest.json, etc)
 │   │   ├── app-icon.png
 │   │   ├── favicon.png
 │   │   ├── manifest.json
-│   │   └── ...      
+│   │   └── ...
 │   ├── views/ *                # Base path for template files
 │   │   ├── index.pug *         # Template file per page
-│   │   └── ...                 
+│   │   └── ...
 ├── config/ *
 │   ├── locales/ *              # Locale JSON files, every file in here is passed to `i18n`
-│   │   ├── en.json          
-│   │   └── ...          
+│   │   ├── en.json
+│   │   └── ...
 │   ├── app.conf.js[on] *       # App meta data to be accessed by `$config` in source files
 │   ├── build.conf.js[on] *     # Custom config for `webpack-mpa-builder`
 ├── public/ *                   # Output built files, gets generated and wiped by build pipeline
 │   └── assets/ *               # Built assets
 │   ├── page2/                  # Every other page
-│   │   └── index.html          
+│   │   └── index.html
 │   ├── app-icon.png            # Manifest files directly copied to output root
-│   ├── favicon.png     
+│   ├── favicon.png
 │   ├── manifest.json
 │   ├── index.html              # Home page from `home.pug`
 │   ├── 404.html                # 404 page from `404.pug`
 │   └── ...
-├── static/ *                   # Pure static assets (directly copied)
+└── static/ *                   # Pure static assets (directly copied)
 ```
 
 ## License
