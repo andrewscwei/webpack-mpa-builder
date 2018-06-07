@@ -279,7 +279,7 @@ The folder structure of your project matters, though you do have the option to c
 │   ├── build.conf.js[on] *     # Custom config for `webpack-mpa-builder`
 ├── public/ *                   # Output built files, gets generated and wiped by build pipeline
 │   └── assets/ *               # Built assets
-│   ├── page2/                  # Every other page
+│   ├── pages/                  # Every other page
 │   │   └── index.html
 │   ├── app-icon.png            # Manifest files directly copied to output root
 │   ├── favicon.png
