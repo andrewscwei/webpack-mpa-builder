@@ -289,7 +289,3 @@ The folder structure of your project matters, though you do have the option to c
 │   └── ...
 └── static/ *                   # Pure static assets (directly copied)
 ```
-
-## License
-
-This software is released under the [MIT License](http://opensource.org/licenses/MIT).
